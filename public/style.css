@@ -8,7 +8,6 @@ body { background: var(--bg); color: var(--ink); font-family: system-ui, -apple-
 main { max-width: 1100px; margin: 0 auto; }
 header { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 20px; }
 h1 { font-size: 28px; letter-spacing: -0.02em; }
-h1 .beta { font-size: 10px; background: var(--surface-2); padding: 3px 8px; border-radius: 3px; vertical-align: middle; margin-left: 8px; color: var(--dim); letter-spacing: 0.15em; }
 .regex { font-family: ui-monospace, monospace; color: var(--ink); margin-top: 12px; font-size: 13px; background: var(--surface-2); padding: 12px 14px; border-radius: 3px; border-left: 3px solid var(--accent); word-break: break-all; }
 .alphabet { font-family: ui-monospace, monospace; color: var(--dim); font-size: 12px; margin-top: 8px; }
 .panel-label { font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
@@ -126,9 +125,34 @@ svg { width: 100%; min-width: 720px; display: block; }
 .derivation-trace .epsilon { color: var(--dim); font-style: italic; }
 .derivation-trace .step.final { color: var(--accept); font-weight: 700; }
 
+.devs-list { list-style: none; padding: 0; margin: 0; }
+.devs-list li {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border-radius: 3px;
+  border-left: 3px solid var(--accent);
+  margin-bottom: 8px;
+}
+.dev-name {
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.dev-role {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 @media (max-width: 600px) {
   body { padding: 12px; }
   .modal { max-height: 92vh; }
   .modal-body { padding: 16px; }
   .grammar-rules { font-size: 13px; }
+  .devs-list li { flex-direction: column; gap: 4px; align-items: flex-start; }
 }
