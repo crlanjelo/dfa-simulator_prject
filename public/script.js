@@ -58,7 +58,6 @@ const DFAS = {
         "q9|a|Δ":{next:"q9",op:"none"}, "q9|b|Δ":{next:"q9",op:"none"},
         "T|a|Δ":{next:"T",op:"none"}, "T|b|Δ":{next:"T",op:"none"},
       },
-      legend: "Read-only PDA. These languages are <b>regular</b>, so no stack is needed — the PDA simply READs each symbol and tracks progress in its state, accepting by final state. The stack holds only Δ and is never modified. (A stack would only be essential for a non-regular language such as aⁿbⁿ.)"
     },
   },
   dfa2: {
@@ -115,7 +114,6 @@ const DFAS = {
         "q8|0|Δ":{next:"q8",op:"none"}, "q8|1|Δ":{next:"q8",op:"none"},
         "T|0|Δ":{next:"T",op:"none"}, "T|1|Δ":{next:"T",op:"none"},
       },
-      legend: "Read-only PDA. These languages are <b>regular</b>, so no stack is needed — the PDA simply READs each symbol and tracks progress in its state, accepting by final state. The stack holds only Δ and is never modified. (A stack would only be essential for a non-regular language such as aⁿbⁿ.)"
     },
   },
 };
@@ -381,7 +379,7 @@ function getInputValues() {
 }
 
 // ───────────────────────── Batch run + results table ─────────────────────────
-function runAll() {
+function validate() {
   const values = getInputValues();
   const re = alphabetRegex();
   const results = values.map((s, idx) => {
@@ -680,7 +678,7 @@ let pdaSim = null;
 function renderPdaPanel() {
   buildFlowchartLayout();
   drawPdaFlowchart();
-  if (stackLegend) stackLegend.innerHTML = DFA.pda.legend;
+  if (stackLegend) stackLegend.innerHTML = DFA.pda.legend || "";
   resetPdaSim();
 }
 
@@ -1217,13 +1215,12 @@ function renderPdaTrace(result, currentIdx) {
         `<span class="tmove" style="color:var(--stack)">ε-move: ${op} → ${step.to}</span>` +
         `<span class="tstack">[${step.stack.join(" ") || "∅"}]</span>`;
     } else {
-      const op = step.op === "push" ? `push '${step.sym}'`
-               : step.op === "pop" ? `pop '${step.top}'` : "no change";
       const tgt = step.to === "T" ? "Reject" : step.to;
+      const opText = step.op === "push" ? `, push '${step.sym}'`
+                   : step.op === "pop" ? `, pop '${step.top}'` : "";
       row.innerHTML =
         `<span class="tnum">${i}</span>` +
-        `<span class="tmove">${step.from} —read '${step.sym}', ${op}→ ${tgt}</span>` +
-        `<span class="tstack">[${step.stack.join(" ")}]</span>`;
+        `<span class="tmove">${step.from} —read '${step.sym}'${opText}→ ${tgt}</span>`;
     }
     pdaTrace.appendChild(row);
   });
@@ -1235,7 +1232,7 @@ pdaInput.addEventListener("keydown", e => { if (e.key === "Enter") startPdaSim()
 
 // ───────────────────────── Wire up ─────────────────────────
 document.getElementById("add-row").onclick = () => makeInputRow("");
-document.getElementById("run-all").onclick = runAll;
+document.getElementById("validate").onclick = validate;
 document.getElementById("reset").onclick = reset;
 switchBtn.onclick = toggleDFA;
 
