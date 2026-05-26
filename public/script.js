@@ -44,22 +44,21 @@ const DFAS = {
       states: ["q0","q1","q2","q3","q4","q5","q6","q7","q8","q9","T"],
       start: "q0", startStack: "Δ", accepts: new Set(["q9"]),
       acceptMode: "finalState",
-      stackAlphabet: ["Δ","a","b"],
+      stackAlphabet: ["Δ"],
       delta: {
-        "q0|a|Δ":{next:"q1",op:"push"}, "q0|b|Δ":{next:"q2",op:"push"},
-        "q1|a|*":{next:"T", op:"none"}, "q1|b|*":{next:"q3",op:"push"},
-        "q2|a|*":{next:"q4",op:"push"}, "q2|b|*":{next:"T", op:"none"},
-        "q3|a|*":{next:"q5",op:"push"}, "q3|b|*":{next:"T", op:"none"},
-        "q4|a|*":{next:"T", op:"none"}, "q4|b|*":{next:"q5",op:"push"},
-        "q5|a|*":{next:"q5",op:"none"}, "q5|b|*":{next:"q6",op:"none"},
-        "q6|a|*":{next:"q7",op:"none"}, "q6|b|*":{next:"q6",op:"none"},
-        "q7|a|*":{next:"q5",op:"none"}, "q7|b|*":{next:"q8",op:"push"},
-        "q8|a|*":{next:"q9",op:"pop"},  "q8|b|*":{next:"q9",op:"pop"},
-        "q9|a|*":{next:"q9",op:"none"}, "q9|b|*":{next:"q9",op:"none"},
-        "T|a|*":{next:"T",op:"none"}, "T|b|*":{next:"T",op:"none"},
+        "q0|a|Δ":{next:"q1",op:"none"}, "q0|b|Δ":{next:"q2",op:"none"},
+        "q1|a|Δ":{next:"T", op:"none"}, "q1|b|Δ":{next:"q3",op:"none"},
+        "q2|a|Δ":{next:"q4",op:"none"}, "q2|b|Δ":{next:"T", op:"none"},
+        "q3|a|Δ":{next:"q5",op:"none"}, "q3|b|Δ":{next:"T", op:"none"},
+        "q4|a|Δ":{next:"T", op:"none"}, "q4|b|Δ":{next:"q5",op:"none"},
+        "q5|a|Δ":{next:"q5",op:"none"}, "q5|b|Δ":{next:"q6",op:"none"},
+        "q6|a|Δ":{next:"q7",op:"none"}, "q6|b|Δ":{next:"q6",op:"none"},
+        "q7|a|Δ":{next:"q5",op:"none"}, "q7|b|Δ":{next:"q8",op:"none"},
+        "q8|a|Δ":{next:"q9",op:"none"}, "q8|b|Δ":{next:"q9",op:"none"},
+        "q9|a|Δ":{next:"q9",op:"none"}, "q9|b|Δ":{next:"q9",op:"none"},
         "T|a|Δ":{next:"T",op:"none"}, "T|b|Δ":{next:"T",op:"none"},
       },
-      legend: "Stack vocabulary: <b>Δ</b> = bottom marker. PUSH stores the symbol read while consuming the mandatory prefix; POP fires when the second 'bab' is confirmed (the required next character). Acceptance is by final state (q9)."
+      legend: "Read-only PDA. These languages are <b>regular</b>, so no stack is needed — the PDA simply READs each symbol and tracks progress in its state, accepting by final state. The stack holds only Δ and is never modified. (A stack would only be essential for a non-regular language such as aⁿbⁿ.)"
     },
   },
   dfa2: {
@@ -104,20 +103,19 @@ const DFAS = {
       states: ["q1","q2","q3","q4","q5","q6","q7","q8","T"],
       start: "q1", startStack: "Δ", accepts: new Set(["q8"]),
       acceptMode: "finalState",
-      stackAlphabet: ["Δ","0","1"],
+      stackAlphabet: ["Δ"],
       delta: {
-        "q1|0|Δ":{next:"q2",op:"push"}, "q1|1|Δ":{next:"q2",op:"push"},
-        "q2|0|*":{next:"q4",op:"none"}, "q2|1|*":{next:"q3",op:"none"},
-        "q3|0|*":{next:"q7",op:"push"}, "q3|1|*":{next:"q5",op:"push"},
-        "q4|0|*":{next:"q6",op:"push"}, "q4|1|*":{next:"q3",op:"none"},
-        "q5|0|*":{next:"q7",op:"none"}, "q5|1|*":{next:"q8",op:"pop"},
-        "q6|0|*":{next:"q8",op:"pop"},  "q6|1|*":{next:"q3",op:"pop"},
-        "q7|0|*":{next:"q6",op:"none"}, "q7|1|*":{next:"q8",op:"pop"},
-        "q8|0|*":{next:"q8",op:"none"}, "q8|1|*":{next:"q8",op:"none"},
-        "T|0|*":{next:"T",op:"none"}, "T|1|*":{next:"T",op:"none"},
+        "q1|0|Δ":{next:"q2",op:"none"}, "q1|1|Δ":{next:"q2",op:"none"},
+        "q2|0|Δ":{next:"q4",op:"none"}, "q2|1|Δ":{next:"q3",op:"none"},
+        "q3|0|Δ":{next:"q7",op:"none"}, "q3|1|Δ":{next:"q5",op:"none"},
+        "q4|0|Δ":{next:"q6",op:"none"}, "q4|1|Δ":{next:"q3",op:"none"},
+        "q5|0|Δ":{next:"q7",op:"none"}, "q5|1|Δ":{next:"q8",op:"none"},
+        "q6|0|Δ":{next:"q8",op:"none"}, "q6|1|Δ":{next:"q3",op:"none"},
+        "q7|0|Δ":{next:"q6",op:"none"}, "q7|1|Δ":{next:"q8",op:"none"},
+        "q8|0|Δ":{next:"q8",op:"none"}, "q8|1|Δ":{next:"q8",op:"none"},
         "T|0|Δ":{next:"T",op:"none"}, "T|1|Δ":{next:"T",op:"none"},
       },
-      legend: "Stack vocabulary: <b>Δ</b> = bottom marker. PUSH stores the symbol read while scanning toward a 111/000/101 pattern; POP fires when a triple completes or a partial breaks. Acceptance is by final state (q8)."
+      legend: "Read-only PDA. These languages are <b>regular</b>, so no stack is needed — the PDA simply READs each symbol and tracks progress in its state, accepting by final state. The stack holds only Δ and is never modified. (A stack would only be essential for a non-regular language such as aⁿbⁿ.)"
     },
   },
 };
@@ -387,14 +385,17 @@ function runAll() {
   const values = getInputValues();
   const re = alphabetRegex();
   const results = values.map((s, idx) => {
-    if (!re.test(s)) return {idx, s, verdict: "invalid", cfg: "invalid", final: "—"};
+    if (!re.test(s)) return {idx, s, verdict: "invalid", cfg: "invalid", pda: "invalid", final: "—"};
     const r = runDFA(s);
     // CFG check: a string is CFG-derivable iff a derivation exists
     const derivable = deriveString(DFA.grammar, s) !== null;
+    // PDA check: run the pushdown automaton
+    const pdaResult = runPDA(s);
     return {
       idx, s,
       verdict: r.accepted ? "accept" : "reject",
       cfg: derivable ? "accept" : "reject",
+      pda: pdaResult.accepted ? "accept" : "reject",
       final: r.final,
     };
   });
@@ -413,20 +414,50 @@ function renderResults(results) {
     const dfaText = r.verdict === "accept" ? "✓ ACCEPT" : r.verdict === "reject" ? "✗ REJECT" : "⚠ INVALID";
     const cfgClass = r.cfg === "accept" ? "v-accept" : r.cfg === "reject" ? "v-reject" : "v-invalid";
     const cfgText = r.cfg === "accept" ? "✓ DERIVABLE" : r.cfg === "reject" ? "✗ NO DERIV." : "⚠ —";
+    const pdaClass = r.pda === "accept" ? "v-accept" : r.pda === "reject" ? "v-reject" : "v-invalid";
+    const pdaText = r.pda === "accept" ? "✓ ACCEPT" : r.pda === "reject" ? "✗ REJECT" : "⚠ —";
     const strDisplay = r.s === "" ? '<span class="str-cell empty">(empty)</span>' : `<span class="str-cell">${escapeHtml(r.s)}</span>`;
+    const valid = r.verdict !== "invalid";
     tr.innerHTML =
       `<td>${r.idx + 1}</td>` +
       `<td>${strDisplay}</td>` +
-      `<td class="${dfaClass}">${dfaText}</td>` +
-      `<td class="${cfgClass}">${cfgText}</td>` +
+      `<td class="${dfaClass} cell-dfa" title="Click to animate on the DFA">${dfaText}</td>` +
+      `<td class="${cfgClass} cell-cfg"${valid ? ' title="Click to see the derivation"' : ''}>${cfgText}${valid ? ' <span class="cell-hint">↗</span>' : ''}</td>` +
+      `<td class="${pdaClass} cell-pda">${pdaText}</td>` +
       `<td>${r.final}</td>` +
-      `<td>${r.verdict !== "invalid" ? '<button class="play-btn">Play ▶</button>' : ""}</td>`;
-    if (r.verdict !== "invalid") {
+      `<td>${valid ? '<button class="play-btn dfa-play-btn">DFA ▶</button> <button class="play-btn pda-play-btn">PDA ▶</button>' : ""}</td>`;
+    if (valid) {
+      // DFA cell or string cell -> animate on the DFA diagram
+      tr.querySelector(".cell-dfa").onclick = (e) => { e.stopPropagation(); animateString(r.s, r.idx); };
+      tr.querySelector(".str-cell").onclick = (e) => { e.stopPropagation(); animateString(r.s, r.idx); };
+      // DFA Play button -> animate on the DFA diagram
+      tr.querySelector(".dfa-play-btn").onclick = (e) => { e.stopPropagation(); animateString(r.s, r.idx); };
+      // CFG cell -> open CFG modal with this string's derivation shown
+      tr.querySelector(".cell-cfg").onclick = (e) => { e.stopPropagation(); openCfgWithDerivation(r.s); };
+      // PDA Play -> open PDA modal and run this string
+      tr.querySelector(".pda-play-btn").onclick = (e) => { e.stopPropagation(); openPdaWithString(r.s); };
+      // clicking elsewhere on the row also animates the DFA
       tr.onclick = () => animateString(r.s, r.idx);
     }
     resultsBody.appendChild(tr);
   }
   resultsWrap.style.display = results.length ? "block" : "none";
+}
+
+// Open the CFG modal and immediately render the derivation for a given string
+function openCfgWithDerivation(s) {
+  renderGrammarModal();
+  openModal(cfgModal);
+  derivInput.value = s;
+  renderDerivation(s);
+}
+
+// Open the PDA modal and run the simulation for a given string
+function openPdaWithString(s) {
+  renderPdaPanel();
+  openModal(pdaModal);
+  pdaInput.value = s;
+  startPdaSim();
 }
 
 function escapeHtml(s) {
@@ -641,7 +672,6 @@ const pdaSvg = document.getElementById("pda-diagram");
 const pdaInput = document.getElementById("pda-input");
 const pdaTape = document.getElementById("pda-tape");
 const pdaStatus = document.getElementById("pda-status");
-const stackTower = document.getElementById("stack-tower");
 const stackLegend = document.getElementById("stack-legend");
 const pdaTrace = document.getElementById("pda-trace");
 
@@ -650,7 +680,7 @@ let pdaSim = null;
 function renderPdaPanel() {
   buildFlowchartLayout();
   drawPdaFlowchart();
-  stackLegend.innerHTML = DFA.pda.legend;
+  if (stackLegend) stackLegend.innerHTML = DFA.pda.legend;
   resetPdaSim();
 }
 
@@ -668,90 +698,132 @@ function stackOpLabel(top, push) {
 
 function buildFlowchartLayout() {
   const pda = DFA.pda;
-  // Only states that have a layout position become READ diamonds.
-  // 'T' -> REJECT terminal; 'qf' (empty-stack final) -> ACCEPT terminal.
-  const states = pda.states.filter(s => s !== "T" && s !== "qf" && DFA.positions[s]);
+  // Only real states become READ diamonds. 'T' -> REJECT, 'qf' -> ACCEPT.
+  const states = pda.states.filter(s => s !== "T" && s !== "qf");
   const nodes = {};
   const edges = [];
   transitionPath = {};
 
-  const basePos = DFA.positions;
-  const DIAMOND_W = 96, DIAMOND_H = 66;
+  const DIAMOND_W = 96, DIAMOND_H = 60;
   const BOX_W = 70, BOX_H = 38;
 
-  // Spread the base positions out so there's room for PUSH/POP boxes on edges
-  const SCALE = 1.55;
-  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-  for (const s of states) {
-    const p = basePos[s];
-    minX = Math.min(minX, p.x); maxX = Math.max(maxX, p.x);
-    minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y);
+  // --- Vertical layout: assign each state a "level" = BFS depth from start ---
+  const level = {};
+  level[pda.start] = 0;
+  const queue = [pda.start];
+  while (queue.length) {
+    const cur = queue.shift();
+    for (const sym of DFA.alphabet) {
+      const t = pda.delta[`${cur}|${sym}|Δ`] || pda.delta[`${cur}|${sym}|*`];
+      if (!t) continue;
+      const nxt = t.next;
+      if (nxt === "T" || nxt === "qf") continue;
+      if (level[nxt] === undefined) { level[nxt] = level[cur] + 1; queue.push(nxt); }
+    }
   }
-  const padTop = 110, padBottom = 130, padLeft = 130, padRight = 150;
-  const sx = x => (x - minX) * SCALE + padLeft;
-  const sy = y => (y - minY) * SCALE + padTop;
+  // any unleveled state (unreachable in BFS) -> place at max level
+  let maxLevel = 0;
+  for (const s of states) { if (level[s] === undefined) level[s] = 0; maxLevel = Math.max(maxLevel, level[s]); }
 
-  for (const s of states) {
-    const p = basePos[s];
-    nodes[s] = { type: "diamond", label: "READ\n" + s, x: sx(p.x), y: sy(p.y), w: DIAMOND_W, h: DIAMOND_H };
+  // group states by level, order within a level for tidy spread
+  const byLevel = {};
+  for (const s of states) { (byLevel[level[s]] = byLevel[level[s]] || []).push(s); }
+
+  const ROW_H = 175;          // vertical gap between levels (room for terminals)
+  const COL_W = 230;          // horizontal gap between states on the same level
+  const padTop = 130, padBottom = 170, padX = 130;
+  const SIDE_COL = 150;       // width reserved on each side for REJECT ovals
+
+  // widest row determines the diamond-grid width
+  let maxRow = 0;
+  for (const lv in byLevel) maxRow = Math.max(maxRow, byLevel[lv].length);
+  const gridW = Math.max(maxRow * COL_W, 3 * COL_W);
+  const canvasW = gridW + (SIDE_COL + padX) * 2;
+  const centerX = canvasW / 2;
+  // dedicated reject-column X positions, outside the diamond grid
+  const leftRejectX = centerX - gridW / 2 - SIDE_COL + 20;
+  const rightRejectX = centerX + gridW / 2 + SIDE_COL - 20;
+
+  for (let lv = 0; lv <= maxLevel; lv++) {
+    const row = byLevel[lv] || [];
+    const n = row.length;
+    row.forEach((s, i) => {
+      const x = centerX + (i - (n - 1) / 2) * COL_W;
+      const y = padTop + lv * ROW_H;
+      nodes[s] = { type: "diamond", label: "READ", stateId: s, x, y, w: DIAMOND_W, h: DIAMOND_H };
+    });
   }
 
-  const spanW = (maxX - minX) * SCALE;
-  const spanH = (maxY - minY) * SCALE;
+  const bottomY = padTop + maxLevel * ROW_H;
 
-  // Terminals
+  // START on top
   const startNode = nodes[pda.start];
-  nodes["__start"] = { type: "term", label: "START", x: startNode.x, y: startNode.y - 84, w: 84, h: BOX_H };
-  edges.push({ from: "__start", to: pda.start, fromSide: "bottom", toSide: "top", path: "straight" });
+  nodes["__start"] = { type: "term", label: "START", x: startNode.x, y: padTop - 84, w: 84, h: BOX_H };
+  edges.push({ from: "__start", to: pda.start, fromSide: "bottom", toSide: "top" });
 
-  nodes["__accept"] = { type: "term", label: "ACCEPT", x: padLeft + spanW + padRight - 40, y: padTop + spanH + padBottom - 30, w: 92, h: BOX_H };
-  nodes["__reject"] = { type: "term", label: "REJECT", x: padLeft - 60, y: padTop + spanH + padBottom - 30, w: 92, h: BOX_H };
+  const spanW = canvasW;
+  let termCounter = 0;
 
-  // Build transitions, inserting PUSH/POP op boxes mid-edge.
-  // Skip epsilon (drain-phase) moves — those aren't part of the READ flow.
-  let opCounter = 0;
+  // Place a terminal near a preferred spot, nudging to avoid overlapping existing nodes.
+  // mode "v" nudges vertically (for side columns); default nudges horizontally.
+  function placeTerminal(key, label, prefX, prefY, w, h, mode) {
+    const collides = (x, y) => {
+      for (const k in nodes) {
+        const n = nodes[k];
+        const dx = Math.abs(n.x - x), dy = Math.abs(n.y - y);
+        if (dx < (n.w + w) / 2 + 22 && dy < (n.h + h) / 2 + 16) return true;
+      }
+      return false;
+    };
+    let x = prefX, y = prefY, tries = 0;
+    while (collides(x, y) && tries < 60) {
+      const step = Math.ceil((tries + 1) / 2) * (mode === "v" ? 56 : 60);
+      if (mode === "v") {
+        y = prefY + (tries % 2 === 0 ? step : -step);
+      } else {
+        x = prefX + (tries % 2 === 0 ? step : -step);
+        if (tries > 12) { y = prefY + Math.floor((tries - 12) / 2) * 40; }
+      }
+      tries++;
+    }
+    nodes[key] = { type: "term", label, x, y, w, h };
+    return nodes[key];
+  }
+
+  // Build transitions. A transition to T becomes a LOCAL REJECT oval placed
+  // near the source state; normal transitions connect READ diamonds.
   const grouped = new Map();
   for (const key of Object.keys(pda.delta)) {
     const [from, sym, cat] = key.split("|");
     if (from === "T" || sym === "ε") continue;
     const t = pda.delta[key];
-    const to = (t.next === "T") ? "__reject" : (t.next === "qf" ? "__accept" : t.next);
-    const op = t.op === "push" ? "push" : (t.op === "pop" ? "pop" : "plain");
-    const gk = `${from}|${to}|${op}`;
-    if (!grouped.has(gk)) grouped.set(gk, { from, to, op, syms: [] });
+    const toReject = (t.next === "T");
+    const gk = toReject ? `${from}|__REJECT` : `${from}|${t.next}`;
+    if (!grouped.has(gk)) grouped.set(gk, { from, to: t.next, toReject, syms: [] });
     grouped.get(gk).syms.push(sym);
   }
 
   for (const g of grouped.values()) {
-    const fromN = nodes[g.from], toN = nodes[g.to];
+    const fromN = nodes[g.from];
     const symLabel = g.syms.join(",");
-    if (g.op === "plain") {
-      // direct edge, labeled with the read symbol
+    if (g.toReject) {
+      // local REJECT oval in the nearest side column, at the source state's row
+      const rk = `__reject${termCounter++}`;
+      const useLeft = fromN.x <= centerX;
+      const colX = useLeft ? leftRejectX : rightRejectX;
+      placeTerminal(rk, "REJECT", colX, fromN.y, 90, BOX_H, "v");
+      const sides = pickSides(fromN, nodes[rk]);
+      edges.push({ from: g.from, to: rk, fromSide: sides.from, toSide: sides.to, label: symLabel, rejy: true });
+      for (const sym of g.syms) transitionPath[`${g.from}|${sym}`] = { from: g.from, to: rk, opBox: null };
+    } else {
+      const toN = nodes[g.to];
       const sides = pickSides(fromN, toN);
       edges.push({ from: g.from, to: g.to, fromSide: sides.from, toSide: sides.to, label: symLabel });
       for (const sym of g.syms) transitionPath[`${g.from}|${sym}`] = { from: g.from, to: g.to, opBox: null };
-    } else {
-      // insert a PUSH or POP box on the midpoint of the edge
-      const opKey = `__op${opCounter++}`;
-      const mx = (fromN.x + toN.x) / 2;
-      const my = (fromN.y + toN.y) / 2;
-      nodes[opKey] = {
-        type: g.op === "push" ? "push" : "pop",
-        label: g.op === "push" ? "PUSH" : "POP",
-        x: mx, y: my, w: BOX_W, h: BOX_H,
-      };
-      const s1 = pickSides(fromN, nodes[opKey]);
-      const s2 = pickSides(nodes[opKey], toN);
-      edges.push({ from: g.from, to: opKey, fromSide: s1.from, toSide: s1.to, label: symLabel });
-      edges.push({ from: opKey, to: g.to, fromSide: s2.from, toSide: s2.to });
-      for (const sym of g.syms) transitionPath[`${g.from}|${sym}`] = { from: g.from, to: g.to, opBox: opKey };
     }
   }
 
-  // End-of-input (Δ) branch for every READ state.
-  // Determine which states are "accepting" for the diagram:
-  //   - emptyStack mode: states that begin the ε-drain
-  //   - finalState mode: states in pda.accepts
+  // Accepting states each get a LOCAL ACCEPT oval directly below, via a Δ edge.
   const acceptingStates = new Set();
   if (pda.acceptMode === "emptyStack") {
     for (const key of Object.keys(pda.delta)) {
@@ -762,19 +834,33 @@ function buildFlowchartLayout() {
     for (const s of pda.accepts) acceptingStates.add(s);
   }
 
+  // Place a terminal near a preferred spot, nudging to avoid overlapping existing nodes.
+
+  let maxTermY = 0;
   for (const s of states) {
     if (acceptingStates.has(s)) {
-      const sides = pickSides(nodes[s], nodes["__accept"]);
-      const lbl = pda.acceptMode === "emptyStack" ? "Δ, ε-pop all" : "end / Δ";
-      edges.push({ from: s, to: "__accept", fromSide: sides.from, toSide: sides.to, label: lbl, dashed: true });
+      // ACCEPT goes straight down (accepting states are usually at the bottom, flow ends here)
+      const ak = `__accept${termCounter++}`;
+      const n = placeTerminal(ak, "ACCEPT", nodes[s].x, nodes[s].y + ROW_H * 0.9, 94, BOX_H);
+      edges.push({ from: s, to: ak, fromSide: "bottom", toSide: "top", label: "Δ", accy: true });
+      maxTermY = Math.max(maxTermY, n.y);
     } else {
-      const sides = pickSides(nodes[s], nodes["__reject"]);
-      edges.push({ from: s, to: "__reject", fromSide: sides.from, toSide: sides.to, label: "Δ", dashed: true });
+      // REJECT in the nearest side column, just below the state's row so it reads
+      // as "input ended here" without crossing the central flow.
+      const rk = `__reject${termCounter++}`;
+      const useLeft = nodes[s].x <= centerX;
+      const colX = useLeft ? leftRejectX : rightRejectX;
+      const n = placeTerminal(rk, "REJECT", colX, nodes[s].y + 14, 90, BOX_H, "v");
+      const sides = pickSides(nodes[s], n);
+      edges.push({ from: s, to: rk, fromSide: sides.from, toSide: sides.to, label: "Δ", dashed: true, rejy: true });
+      maxTermY = Math.max(maxTermY, n.y);
     }
   }
 
-  const vbW = padLeft + spanW + padRight + 60;
-  const vbH = padTop + spanH + padBottom + 40;
+  const spanH = Math.max(bottomY, maxTermY) + padBottom;
+
+  const vbW = spanW;
+  const vbH = spanH + 60;
   currentFlowchart = { nodes, edges, viewBox: `0 0 ${vbW} ${vbH}` };
 }
 
@@ -785,6 +871,17 @@ function pickSides(a, b) {
   } else {
     return dy >= 0 ? { from: "bottom", to: "top" } : { from: "top", to: "bottom" };
   }
+}
+
+// shortest distance from a node center to the segment a-b
+function segNodeDist(a, b, n) {
+  const vx = b.x - a.x, vy = b.y - a.y;
+  const wx = n.x - a.x, wy = n.y - a.y;
+  const L2 = vx*vx + vy*vy;
+  let t = L2 ? (wx*vx + wy*vy) / L2 : 0;
+  t = Math.max(0, Math.min(1, t));
+  const px = a.x + t*vx, py = a.y + t*vy;
+  return Math.hypot(n.x - px, n.y - py);
 }
 
 let pdaFlowNodes = {};
@@ -813,14 +910,41 @@ function drawPdaFlowchart() {
     const a = anchorPoint(from, e.fromSide);
     const b = anchorPoint(to, e.toSide);
     const path = document.createElementNS(NS, "path");
-    path.setAttribute("d", `M ${a.x},${a.y} L ${b.x},${b.y}`);
-    path.setAttribute("class", "fc-edge" + (e.dashed ? " dashed" : ""));
+
+    // Check if the straight segment passes through any non-endpoint READ diamond.
+    // (We only avoid diamonds — terminal ovals are leaves; dodging them makes worse tangles.)
+    let obstacle = null, obstacleDist = Infinity;
+    for (const [k, n] of Object.entries(fc.nodes)) {
+      if (k === e.from || k === e.to) continue;
+      if (n.type !== "diamond") continue;
+      const d = segNodeDist(a, b, n);
+      if (d < Math.max(n.w, n.h) / 2 + 8 && d < obstacleDist) { obstacle = n; obstacleDist = d; }
+    }
+
+    let labelX, labelY;
+    if (obstacle) {
+      // bow the edge around the obstacle using a quadratic curve
+      const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      // perpendicular direction
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const len = Math.hypot(dx, dy) || 1;
+      let px = -dy / len, py = dx / len;
+      // push away from the obstacle: pick side that increases distance
+      const side = ((obstacle.x - mx) * px + (obstacle.y - my) * py) > 0 ? -1 : 1;
+      const bow = Math.max(obstacle.w, obstacle.h) / 2 + 46;
+      const cx = mx + px * side * bow, cy = my + py * side * bow;
+      path.setAttribute("d", `M ${a.x},${a.y} Q ${cx},${cy} ${b.x},${b.y}`);
+      labelX = (a.x + 2*cx + b.x) / 4; labelY = (a.y + 2*cy + b.y) / 4;
+    } else {
+      path.setAttribute("d", `M ${a.x},${a.y} L ${b.x},${b.y}`);
+      labelX = (a.x + b.x) / 2; labelY = (a.y + b.y) / 2;
+    }
+    path.setAttribute("class", "fc-edge" + (e.dashed ? " dashed" : "") + (e.accy ? " edge-accept" : "") + (e.rejy ? " edge-reject" : ""));
     path.setAttribute("marker-end", "url(#fc-arr)");
     pdaSvg.appendChild(path);
     if (e.label) {
-      const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
       const txt = document.createElementNS(NS, "text");
-      txt.setAttribute("x", mx); txt.setAttribute("y", my - 4);
+      txt.setAttribute("x", labelX); txt.setAttribute("y", labelY - 4);
       txt.setAttribute("class", "fc-edge-label");
       txt.textContent = e.label;
       pdaSvg.appendChild(txt);
@@ -830,12 +954,18 @@ function drawPdaFlowchart() {
 
   for (const [key, n] of Object.entries(fc.nodes)) {
     const g = document.createElementNS(NS, "g");
-    g.setAttribute("class", `fc-node fc-${n.type}` + (key === "__accept" ? " fc-accept" : key === "__reject" ? " fc-reject" : key === "__start" ? " fc-start" : ""));
+    const isAccept = key.startsWith("__accept"), isReject = key.startsWith("__reject"), isStart = key === "__start";
+    g.setAttribute("class", `fc-node fc-${n.type}` + (isAccept ? " fc-accept" : isReject ? " fc-reject" : isStart ? " fc-start" : ""));
     if (n.type === "diamond") {
       const poly = document.createElementNS(NS, "polygon");
       const hw = n.w/2, hh = n.h/2;
       poly.setAttribute("points", `${n.x},${n.y-hh} ${n.x+hw},${n.y} ${n.x},${n.y+hh} ${n.x-hw},${n.y}`);
       g.appendChild(poly);
+    } else if (n.type === "term") {
+      const ell = document.createElementNS(NS, "ellipse");
+      ell.setAttribute("cx", n.x); ell.setAttribute("cy", n.y);
+      ell.setAttribute("rx", n.w/2); ell.setAttribute("ry", n.h/2);
+      g.appendChild(ell);
     } else {
       const rect = document.createElementNS(NS, "rect");
       rect.setAttribute("x", n.x - n.w/2); rect.setAttribute("y", n.y - n.h/2);
@@ -878,19 +1008,16 @@ function pdaFlowHighlight(nodeKey) {
 }
 
 function renderStack(stack) {
-  stackTower.innerHTML = "";
-  stack.forEach((sym, idx) => {
-    const cell = document.createElement("div");
-    cell.className = "stack-cell";
-    if (idx === 0) cell.classList.add("bottom");
-    if (idx === stack.length - 1 && stack.length > 1) cell.classList.add("top");
-    cell.textContent = sym;
-    stackTower.appendChild(cell);
-  });
+  // Stack panel removed — these PDAs are read-only (no stack). No-op kept for call sites.
 }
 
-function pdaHighlightState(s) {
-  if (s === "T") { pdaFlowHighlight("__reject"); return; }
+function pdaHighlightState(s, sym, from) {
+  // If this step rejects (goes to T), highlight the specific local REJECT oval.
+  if (s === "T") {
+    const tp = (sym !== undefined && from !== undefined) ? transitionPath[`${from}|${sym}`] : null;
+    pdaFlowHighlight(tp ? tp.to : null);
+    return;
+  }
   pdaFlowHighlight(s);
 }
 function pdaHighlightEdge(from, to, sym) {
@@ -898,8 +1025,9 @@ function pdaHighlightEdge(from, to, sym) {
     e.path.classList.remove("active");
     e.path.setAttribute("marker-end","url(#fc-arr)");
   }
-  const tgt = to === "T" ? "__reject" : to;
   const tp = (sym !== undefined) ? transitionPath[`${from}|${sym}`] : null;
+  // resolve the actual target node key (handles local reject ovals)
+  const tgt = tp ? tp.to : (to === "T" ? null : to);
   const keys = (tp && tp.opBox)
     ? [`${from}->${tp.opBox}`, `${tp.opBox}->${tgt}`]
     : [`${from}->${tgt}`];
@@ -1025,9 +1153,9 @@ function pdaTick() {
   renderPdaTape(pdaSim.input, consumed, consumed < pdaSim.input.length);
   if (tp && tp.opBox) {
     pdaFlowHighlight(tp.opBox);
-    setTimeout(() => { if (pdaSim) pdaHighlightState(step.to); }, 280);
+    setTimeout(() => { if (pdaSim) pdaHighlightState(step.to, step.sym, step.from); }, 280);
   } else {
-    pdaHighlightState(step.to);
+    pdaHighlightState(step.to, step.sym, step.from);
   }
   pdaSim.timer = setTimeout(pdaTick, 650);
 }
@@ -1035,12 +1163,36 @@ function finishPdaSim() {
   if (!pdaSim) return;
   if (pdaSim.result.stuck) return;
   renderPdaTrace(pdaSim.result, pdaSim.result.trace.length);
-  const terminal = pdaSim.result.accepted ? "__accept" : "__reject";
   for (const e of pdaFlowEdges.values()) { e.path.classList.remove("active"); e.path.setAttribute("marker-end","url(#fc-arr)"); }
-  pdaFlowHighlight(terminal);
-  const stackStr = pdaSim.result.finalStack.length ? `[${pdaSim.result.finalStack.join(", ")}]` : "empty";
-  if (pdaSim.result.accepted) setPdaStatus("accept", `✓ Accepted — stack emptied (${stackStr})`);
-  else setPdaStatus("reject", `✗ Rejected — final stack ${stackStr}, not empty / not in accepting path`);
+  // highlight the local ACCEPT oval under the final accepting state, if accepted
+  if (pdaSim.result.accepted) {
+    const fs = pdaSim.result.finalState;
+    let acceptKey = null;
+    for (const k in pdaFlowNodes) {
+      if (k.startsWith("__accept")) {
+        // find the accept oval whose incoming edge comes from the final state
+        const e = pdaFlowEdges.get(`${fs}->${k}`);
+        if (e) { acceptKey = k; break; }
+      }
+    }
+    pdaFlowHighlight(acceptKey);
+    const stackStr = pdaSim.result.finalStack.length ? `[${pdaSim.result.finalStack.join(", ")}]` : "empty";
+    setPdaStatus("accept", `✓ Accepted — ended in final state ${fs}`);
+    if (acceptKey) { const e = pdaFlowEdges.get(`${fs}->${acceptKey}`); if (e){ e.path.classList.add("active"); e.path.setAttribute("marker-end","url(#fc-arrA)"); } }
+  } else {
+    // highlight the local REJECT oval under the final (non-accepting) state
+    const fs = pdaSim.result.finalState;
+    let rejectKey = null;
+    for (const k in pdaFlowNodes) {
+      if (k.startsWith("__reject")) {
+        const e = pdaFlowEdges.get(`${fs}->${k}`);
+        if (e) { rejectKey = k; break; }
+      }
+    }
+    pdaFlowHighlight(rejectKey);
+    if (rejectKey) { const e = pdaFlowEdges.get(`${fs}->${rejectKey}`); if (e){ e.path.classList.add("active"); e.path.setAttribute("marker-end","url(#fc-arrA)"); } }
+    setPdaStatus("reject", `✗ Rejected — ended in non-accepting state ${fs}`);
+  }
   renderPdaTape(pdaSim.input, pdaSim.input.length, false);
 }
 
@@ -1093,12 +1245,12 @@ loadDFA("dfa1");
 const themeToggle = document.getElementById("theme-toggle");
 function applyTheme(theme) {
   document.body.setAttribute("data-theme", theme);
-  if (themeToggle) themeToggle.textContent = theme === "light" ? "☀️ Light" : "🌙 Dark";
+  if (themeToggle) themeToggle.textContent = theme === "light" ? "Mode: Dark" : "Mode: Light";
 }
 if (themeToggle) {
   themeToggle.onclick = () => {
-    const current = document.body.getAttribute("data-theme") || "dark";
-    applyTheme(current === "dark" ? "light" : "dark");
+    const current = document.body.getAttribute("data-theme") || "light";
+    applyTheme(current === "light" ? "dark" : "light");
   };
 }
-applyTheme("dark");
+applyTheme("light");
