@@ -24,19 +24,21 @@ const DFAS = {
       q9:{x:1040,y:200}, T:{x:80,y:380},
     },
     viewBox: "0 0 1100 460",
-    grammar: {
+        grammar: {
       start: "S",
       rules: {
-        S: [["a","b","a","A"], ["b","a","b","A"]],
-        A: [["a","A"], ["b","A"], ["b","a","b","B"]],
-        B: [["a","C"], ["b","C"], ["a","b","C"], ["b","a","C"]],
-        C: [["a","C"], ["b","C"], []]
+        S: [["a","b","a","W"], ["b","a","b","W"]],
+        W: [["a","W"], ["b","W"], ["b","a","b","X"]],
+        X: [["a","X"], ["b","X"], ["Y"]],
+        Y: [["a","Z"], ["b","Z"], ["a","b","Z"], ["b","a","Z"]],
+        Z: [["a","Z"], ["b","Z"], []]
       },
       display: [
-        { lhs: "S", rhs: ["abaA","babA"] },
-        { lhs: "A", rhs: ["aA","bA","babB"] },
-        { lhs: "B", rhs: ["aC","bC","abC","baC"] },
-        { lhs: "C", rhs: ["aC","bC","λ"] }
+        { lhs: "S", rhs: ["abaW","babW"] },
+        { lhs: "W", rhs: ["aW","bW","babX"] },
+        { lhs: "X", rhs: ["aX","bX","Y"] },
+        { lhs: "Y", rhs: ["aZ","bZ","abZ","baZ"] },
+        { lhs: "Z", rhs: ["aZ","bZ","λ"] }
       ],
       note: "λ denotes the empty string. Capital letters are non-terminals; lowercase are terminals."
     },
